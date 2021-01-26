@@ -81,6 +81,9 @@ x2_lim= round(max(G10_x2_surf));
 x3_lim= round(max(G10_x3_surf));
 
 %plots using trisurf to generate 3D surface
+    %all plots saved as PNG to current directory
+
+%10th Percentile
 figure('Name','10th Percentile');
 trisurf(G10_dt,G10_x1_surf,G10_x2_surf,G10_x3_surf);
 xlabel("x1");
@@ -88,7 +91,9 @@ ylabel("x2");
 zlabel("x3");
 title("Gaussian - 10th Percentile Ellipsoid");
 axis([-(x1_lim) x1_lim -(x2_lim) x2_lim -(x3_lim) x3_lim]);
+saveas(gcf,'10th Percentile Ellipsoid.png')
 
+%50th Percentile
 figure('Name','50th Percentile');
 trisurf(G50_dt,G50_x1_surf,G50_x2_surf,G50_x3_surf);
 xlabel("x1");
@@ -96,7 +101,9 @@ ylabel("x2");
 zlabel("x3");
 title("Gaussian - 50th Percentile Ellipsoid");
 axis([-(x1_lim) x1_lim -(x2_lim) x2_lim -(x3_lim) x3_lim]);
+saveas(gcf,'50th Percentile Ellipsoid.png')
 
+%90th Percentile
 figure('Name','90th Percentile');
 trisurf(G90_dt,G90_x1_surf,G90_x2_surf,G90_x3_surf);
 xlabel("x1");
@@ -104,6 +111,7 @@ ylabel("x2");
 zlabel("x3");
 title("Gaussian - 90th Percentile Ellipsoid");
 axis([-(x1_lim) x1_lim -(x2_lim) x2_lim -(x3_lim) x3_lim]);
+saveas(gcf,'90th Percentile Ellipsoid.png')
 
 clear x1_lim x2_lim x3_lim cutoff 
 
