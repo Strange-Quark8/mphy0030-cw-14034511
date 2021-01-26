@@ -1,22 +1,36 @@
-function [outputArg1,outputArg2] = quadratic_polynomial(inputArg1,inputArg2)
-%QUADRATIC_POLYNOMIAL Summary of this function goes here
-%   Detailed explanation goes here
+function QPoly = quadratic_polynomial(a,x)
+%QUADRATIC_POLYNOMIAL takes in a 10x1 coefficient vector and a 3x1 variable vector
+                        %and outputs the solution to the function QPoly.
+%   QUADRATIC_POLYNOMIAL takes in a 10x1 coefficient vector and a 3x1
+%   variable vector representing the terms in a 3-variable 2nd order
+%   polynomial equation. The function outputs a value, which is the
+%   solution to the quadratic polynomial function, avoiding the use of
+%   symbolic algebra toolboxes.
+%   
+%   INPUTS
+%   a : a 10x1 column vector that represents the coefficient values of the
+%   quadratic polynomial
+%   x : a 3x1 column vector representing the variables in the polynomial
+%
+%   OUTPUTS
+%   Qpoly :  An numerical value representing the solution to the quadratic
+%   polynomial.
 
-%assume input matrix is already in symbolic form...
-x1=x(1);
-x2=x(2);
-x3=x(3);
+%test that a matrix contains  10 values
+if length(a) ~= 10
+    fprintf('Error: Use a 10 parameter vector for a')
+    return 
+end 
 
-syms x1 x2 x3 
+%if less than 10, replace with 0s?
 
-f=solve('a(2)*((x1)^2)+a(3)*((x2)^2)+a(4)*((x3)^2)+a(5)*(x1)*(x2)+a(6)*x(1)*(x3)+a(7)*(x2)*(x3)+a(8)*(x1)+a(9)*(x2)+a(10)*(x3)+a(1)',[x1,x2,x3]);
+%test that variable matrix contains only 3 variables
+if length(polyx) ~= 3
+    fprintf('Error: Use a 3 variable vector for x')
+    return 
+end 
 
-x1_sol= f.x1
-x2_sol= f.x2
-x3_sol= f.x3
-roots(a);
+f = (a(2)*x(1)^2) + (a(3)*x(2)^2)+(a(4)*x(3)^2)+(a(5)*x(1)*x(2))+(a(6)*x(1)*x(3))+(a(7)*x(2)*x(3))+(a(8)*x(1))+(a(9)*x(2))+(a(10)*x(3))+a(1);
 
-outputArg1 = inputArg1;
-outputArg2 = inputArg2;
 end
 
