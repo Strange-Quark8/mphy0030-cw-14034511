@@ -11,17 +11,18 @@ function simple_image_write(bin_image,vol,voxdims)
 %   BIN_IMAGE= a binary file specified by name BIN_IMAGE to be read and viewed as a 3D image. See
 %   'simple_image_read'.
 
-writefile= fopen(bin_image, 'w');
+writefile= fopen(bin_image, 'w'); %create a binary write file named 'writefile', with full write permissions
 
 img_size = uint8(size(vol)); %determine the size of the image
 vox_size = uint8(size(voxdims)); %determine size of vox dimensions
 
-%create a binary write file named 'bin', with full write permissions
 
 %bit_vol = int16(vol); %converting volume sizes to 16-bit integert equivalent
 %bit_vox = single(voxdims);  %single precision is 32-bit floating equivalent
 
 fwrite(writefile, [img_size, vox_size]); %storing of image file size as a header
+%fwrite(writefile, bit_vol); %writing of volume data
+%fwrite(writefile, bit_vox); %writing of voxel data
 fwrite(writefile, vol,'int16'); %writing of volume data
 fwrite(writefile, voxdims,'single'); %writing of voxel data
 

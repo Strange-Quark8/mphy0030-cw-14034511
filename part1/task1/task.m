@@ -11,8 +11,8 @@ simple_image_write('data/image.sim',vol,voxdims);
 
 img_size = head_vol;
 short_var= min(img_size); %choosing shortest variable to slice image as 'z'
-start_slice = randi(short_var-2); %initialising fist value to 
-slice = [start_slice, (start_slice+1), (start_slice+2)]; %selects next three slices; easier to compare visually
+start_slice = randi(short_var-2); %randomising values along short-var; need to have 3 slices
+slice = [start_slice, (start_slice+1), (start_slice+2)]; %selects next three slices to compare visually
 
 for n = [1:3] %iterate through the 3 slices
     pic= img(:,:,slice(n)); %x,y are fixed, z variable on slice values
@@ -28,7 +28,7 @@ for n = [1:3] %iterate through the 3 slices
     hold on
     axis on
     save_name=['data/slice_',num2str(n),'.png'];
-    saveas(gcf,save_name);
+    saveas(gcf,save_name); %save images as png into 'data' folder
 end
 
 clear all 

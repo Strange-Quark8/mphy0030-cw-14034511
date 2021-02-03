@@ -1,6 +1,6 @@
 function [img,dim,head_vol] = simple_image_read(bin_image,vol,voxdims)
 %SIMPLE_IMAGE_READ reads a binary image file, representing a medical 3D
-%image file
+%image file. Intended to be paired with custom SIMPLE_IMAGE_WRITE function.
 %   INPUT:
 %   BIN_IMAGE = the name of the binary image file created by the
 %               SIMPLE_IMAGE_WRITE function
@@ -8,9 +8,11 @@ function [img,dim,head_vol] = simple_image_read(bin_image,vol,voxdims)
 %   VOXDIMS = Dimensions of the image voxels
 %
 %   OUTPUT:
-%   IMG = the 3D image file
+%   IMG = the 3D image file (3D matrix of doubles)
 %   DIM = dimensions of the individual voxels as read by the file header
+%   (1x3 matrix of doubles)
 %   HEAD_VOL = the size of the image, as read by the file header
+%   (1x3 matrix of doubles)
 
 readfile =fopen(bin_image,'r'); %read the input binary file
 header= fread(readfile, [1,5]); %extract the first 5 values as the file header
