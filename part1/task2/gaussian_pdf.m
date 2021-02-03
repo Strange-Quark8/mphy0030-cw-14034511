@@ -21,10 +21,11 @@ function [G]= gaussian_pdf(X,mu,sig)
 % OUTPUTS:
     %[G] => A column vector containing the pdf values of dataset 'X'
     
-    
+    %tic
     %Easy Implementation; Slow run time
         %G = diag((1/(sqrt(det(covariance)).*(2*pi)^(3/2))).*exp(((-0.5).*(x(row,:)-mu))*(inv(covariance))*(x(row,:)-mu).');
-
+    %toc
+    
     %Iterative Approach
         %Determining number of samples from data by row number
             samples = length(X);

@@ -75,7 +75,7 @@ cutoff= 1000; %standardising number of points to use across plots, larger value 
     clear diff sort_diff top_vals dt idx
     
 %Assigining adaptive limits for comparison
-%tagged to 10th percentile as ellipsoid will be largest
+%pinned to 10th percentile as ellipsoid will be largest
 x1_lim= round(max(G10_x1_surf));
 x2_lim= round(max(G10_x2_surf));
 x3_lim= round(max(G10_x3_surf));
@@ -113,6 +113,5 @@ title("Gaussian - 90th Percentile Ellipsoid");
 axis([-(x1_lim) x1_lim -(x2_lim) x2_lim -(x3_lim) x3_lim]);
 saveas(gcf,'90th Percentile Ellipsoid.png')
 
-clear x1_lim x2_lim x3_lim cutoff 
+clear all
 
-%NOTE: attempt tetramesh?
