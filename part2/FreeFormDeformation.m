@@ -8,6 +8,9 @@ classdef FreeFormDeformation
         mesh_x
         mesh_y
         mesh_z
+        coor_x;
+        coor_y;
+        coor_z
         control
         tfm_control
     end
@@ -25,7 +28,7 @@ classdef FreeFormDeformation
                     %as well as voxel dimensions (voxdims), and image range matrix (img_rg). This allows
                     %calculation of the respective mesh.
                     
-                    %2. arg2; a 2 x 3 matrix, where each column identifies a
+                    %2. rg; a 2 x 3 matrix, where each column identifies a
                     %single variable (x, y, z), row1 = Min_Val, row2=
                     %Max_vals
             
@@ -48,6 +51,9 @@ classdef FreeFormDeformation
                 FF.mesh_x = rg_mesh_x;
                 FF.mesh_y = rg_mesh_y;
                 FF.mesh_z = rg_mesh_z;
+                FF.coor_x = coor_x;
+                FF.coor_y = coor_y;
+                FF.coor_z = coor_z;
                 FF.control = [FF.mesh_x FF.mesh_y FF.mesh_z];
             end
             
@@ -67,7 +73,7 @@ classdef FreeFormDeformation
             %creating a scaler that allows for 0 to produce an identity
             %matrix
             
-            strength = rand(1) %generate a number between 0 and 1; randomly normal
+            %strength = rand(1) %generate a number between 0 and 1; randomly normal
             scaler = randi([-1 1]) %randomly select either -1 or 1 
             strength = 1+ (strength * scaler); %scaler is either scale up or down depending on result. If strength is 0, final result is 1
             scale = diag([1 1 1 1]) * strength; %output the scale transformation matrix
@@ -95,9 +101,13 @@ classdef FreeFormDeformation
         end
         
         function [warp_image] = warp_image(FF,Image3D,RBFSpline,lambda, sigma)
-            %METHOD1 Summary of this method goes here
-            %   Detailed explanation goes here
-            %fit the  newly trans
+            %WARP_IMAGE applies the principles from class RBFSpline to
+            %facilitate the warping of a selected image. First, the image
+            %is trained upon a set of control variables generated from the
+            %FreeFormDeformation class, and based on randomly distributed
+            %points. Next, it is evaluated against the image itself
+            %againsty the transformed points, where the new outcome
+            %coordinates are output.
             spline = RBFSpline.fit(FF.control,FF.tfm_control,lambda,sigma);
             
             warp_eval = RBFSpline.evaluate([Image3D.img_x Image3D.img_y Image3D.img_z], tfm_control, spline, sigma);
